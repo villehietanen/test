@@ -74,3 +74,5 @@ export const getBookings = function(id: mongoose.Types.ObjectId): Promise<IBooki
     });
     return booking
 }
+
+
