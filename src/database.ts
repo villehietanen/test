@@ -71,8 +71,11 @@ export const startDataBase = mockgoose.prepareStorage().then(() => {
 export const getBookings = function(id: mongoose.Types.ObjectId): Promise<IBooking | null> {
     const booking = Booking.findById(id).populate('passenger flights').then(function (booking) {
         return booking;
+    }).catch(function() {
+        console.log('an error occurred');
+        return null;
     });
-    return booking
+    return booking;
 }
 
 
