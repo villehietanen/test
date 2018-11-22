@@ -1,4 +1,4 @@
-import  { startDataBase, getBookings } from './database';
+import  { startDataBase, getBookingById } from './database';
 import * as express from 'express';
 import { IBooking } from './models/Booking';
 
@@ -9,7 +9,7 @@ startDataBase();
 
 app.get('/bookings/:id', function(req, res) {
     const id = req.params.id;
-    getBookings(id).then(function(data: IBooking | null) {
+    getBookingById(id).then(function(data: IBooking | null) {
         if (data) {
             res.send(data);
         } else {

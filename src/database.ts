@@ -70,7 +70,7 @@ export const startDataBase = function() {
     });
 }
 
-export const getBookings = function(id: mongoose.Types.ObjectId): Promise<IBooking | null> {
+export const getBookingById = function(id: mongoose.Types.ObjectId): Promise<IBooking | null> {
     const booking = Booking.findById(id).populate('passenger flights').then(function (booking) {
         return booking;
     }).catch(function() {
