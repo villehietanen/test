@@ -1,4 +1,4 @@
-import  { startDataBase, getBookingById } from './database';
+import  { startDataBase, getBookingById, getBookings } from './database';
 import * as express from 'express';
 import { IBooking } from './models/Booking';
 
@@ -24,7 +24,18 @@ app.get('/bookings/', function(req, res) {
         console.log('received uid: ', req.query.uid)
         //TODO: Find bookings matching with uid and return
     }
+
+    getBookings().then(function(data: IBooking[] | null) {
+        if (data) {
+            res.send(data);
+        } else {
+            console.log('booking not found');
+            res.send('Booking not found');
+        }
+    });
 })
+
+
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
 

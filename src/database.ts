@@ -80,4 +80,15 @@ export const getBookingById = function(id: mongoose.Types.ObjectId): Promise<IBo
     return booking;
 }
 
+export const getBookings = function(): Promise<IBooking[] | null> {
+    console.log('123');
+    const booking = Booking.find({}).populate('passenger flights').then(function (booking) {
+        return booking;
+    }).catch(function() {
+        console.log('an error occurred');
+        return null;
+    });
+    return booking;
+}
+
 
