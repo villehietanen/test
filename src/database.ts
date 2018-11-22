@@ -6,7 +6,8 @@ import Booking, { IBooking } from './models/Booking';
 
 let mockgoose: Mockgoose = new Mockgoose(mongoose);
 
-export const startDataBase = mockgoose.prepareStorage().then(() => {
+export const startDataBase = function() {
+    mockgoose.prepareStorage().then(() => {
     mongoose.connect('mongodb://foobar/baz');
     mongoose.connection.on('connected', () => {  
         console.log('db connection is now open');
@@ -66,7 +67,8 @@ export const startDataBase = mockgoose.prepareStorage().then(() => {
         });
         booking2.save();
     });  
-});
+    });
+}
 
 export const getBookings = function(id: mongoose.Types.ObjectId): Promise<IBooking | null> {
     const booking = Booking.findById(id).populate('passenger flights').then(function (booking) {

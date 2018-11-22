@@ -5,7 +5,7 @@ import { IBooking } from './models/Booking';
 const app = express();
 const port = 3000
 
-startDataBase;
+startDataBase();
 
 app.get('/bookings/:id', function(req, res) {
     const id = req.params.id;
