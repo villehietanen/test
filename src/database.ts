@@ -3,6 +3,7 @@ import {Mockgoose} from 'mockgoose';
 import Flight from './models/flight';
 import Passenger from './models/passenger';
 import Booking, { IBooking } from './models/Booking';
+import { IBookings } from './models/bookings';
 
 let mockgoose: Mockgoose = new Mockgoose(mongoose);
 
@@ -80,15 +81,25 @@ export const getBookingById = function(id: mongoose.Types.ObjectId): Promise<IBo
     return booking;
 }
 
-export const getBookings = function(): Promise<IBooking[] | null> {
-    console.log('123');
-    const booking = Booking.find({}).populate('passenger flights').then(function (booking) {
-        return booking;
+export const getBookings = function(): Promise<IBookings[] | null> {
+    const booking = Booking.find({},'_id passenger').populate('passenger flights').then(function (bookings) {
+        const filteredBookings = bookings.map(function(booking) {
+            return {
+                bookingId: booking._id,
+                lastName: booking.passenger.lastName,
+                departure: booking.flights[0].departure
+            }
+        });
+        return filteredBookings;
     }).catch(function() {
         console.log('an error occurred');
         return null;
     });
     return booking;
+}
+
+export const getBookingsByUid = function() {
+    //TODO: return all bookings matching with Uid
 }
 
 

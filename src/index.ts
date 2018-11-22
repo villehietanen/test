@@ -6,7 +6,7 @@ axios.get(`${baseUrl}`).then(function(res: any) {
     console.log(res.data);
 
     console.log('find first');
-    axios.get(`${baseUrl}/${res.data[0]._id}`).then(function(res: any) {
+    axios.get(`${baseUrl}/${res.data[0].bookingId}`).then(function(res: any) {
         console.log(res.data);
     });
 });

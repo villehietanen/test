@@ -1,6 +1,7 @@
 import  { startDataBase, getBookingById, getBookings } from './database';
 import * as express from 'express';
 import { IBooking } from './models/Booking';
+import { IBookings } from './models/bookings';
 
 const app = express();
 const port = 3000
@@ -25,7 +26,7 @@ app.get('/bookings/', function(req, res) {
         //TODO: Find bookings matching with uid and return
     }
 
-    getBookings().then(function(data: IBooking[] | null) {
+    getBookings().then(function(data: IBookings[] | null) {
         if (data) {
             res.send(data);
         } else {
